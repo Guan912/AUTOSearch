@@ -10,11 +10,11 @@
 对通知动态里五个子页面的信息的标题、内容进行检索
 
 🍳 建spider
-> [教学通知](http://au.njust.edu.cn/2075/list.htm)
- [科研通知](http://au.njust.edu.cn/2076/list.htm)
- [学术动态](http://au.njust.edu.cn/2078/list.htm)
- [学院公告](http://au.njust.edu.cn/2080/list.htm)
- [学生工作](http://au.njust.edu.cn/2082/list.htm)
+> [](http://au.njust.edu.cn/2075/list.htm)
+ [](http://au.njust.edu.cn/2076/list.htm)
+ [](http://au.njust.edu.cn/2078/list.htm)
+ [](http://au.njust.edu.cn/2080/list.htm)
+ [](http://au.njust.edu.cn/2082/list.htm)
 <br>
 🍲 建索引<br>
 🥣 结果排序<br>
