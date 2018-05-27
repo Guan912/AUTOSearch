@@ -1,4 +1,3 @@
-
 # AUTOSearch
 *A simple search engine for the contents of the college's notice.*
 ## ✏写在前面
@@ -20,11 +19,11 @@
 
 > python环境
 >> python环境之前学习的时候搭建过了（其实爬过小虫，没深入了解，就是为了吃的爬了一下大众点评。。）
+
 👉<img width="200" src="https://github.com/Guan912/AUTOSearch/blob/master/image00/1.jpg"/>
 
 > 爬虫库
 >> BeautifulSoup：最主要的功能是从网页抓取数据,推荐在现在的项目中使用Beautiful Soup 4，不过它已经被移植到BS4了，也就是说导入时我们需要 import bs4
-
 <br>
 >> urllib.request:提供了最基本的构造 HTTP 请求的方法，利用它可以模拟浏览器的一个请求发起过程，同时它还带有处理 authenticaton （授权验证）， redirections （重定向)， cookies (浏览器Cookies）以及其它内容
 
