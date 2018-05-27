@@ -19,7 +19,6 @@
 
 > python环境
 >> python环境之前学习的时候搭建过了（其实爬过小虫，没深入了解，就是为了吃的爬了一下大众点评。。）
-
 👉<img width="200" src="https://github.com/Guan912/AUTOSearch/blob/master/image00/1.jpg"/>
 
 > 爬虫库
