@@ -1,0 +1,10 @@
+# 爬网页
+## 准备工作
+*python环境
+*爬虫库BeautifulSoup4、urllib.request
+python环境之前学习的时候搭建过了（其实爬过小虫，没深入了解，就是为了吃的爬了一下大众点评。。）
+> BeautifulSoup4库：
+> urllib.request:
+## 通知页面分析
+爬的是教学通知的http://au.njust.edu.cn/2075/list.htm
+> 看了一下源，学校网站的都很规整，比较好找到要的flag啥的标签
