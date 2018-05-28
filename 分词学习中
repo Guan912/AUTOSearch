@@ -4,4 +4,4 @@ Friso是使用c语言开发的一款高性能中文分词器，使用流行的mm
 源码无需修改就能在各种平台下编译使用，加载完20万的词条，内存占用稳定为14.5M。
 开源项目：https://gitee.com/lionsoul/friso
 1、mmseg四种过滤算法，分词准确率达到了98.41%，本算法的原作：http://technology.chtsai.org/mmseg/。
-【待续……】
+【待续05/28……】
