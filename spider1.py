@@ -3,9 +3,6 @@
 import io  
 import os  
 import sys  
-import urllib
-#from urllib  import request  
-#from urllib import  urlopen  
 from bs4 import BeautifulSoup  
 import datetime  
 import random  
@@ -31,13 +28,11 @@ def getArticleLinks(pageUrl):
     bsObj=BeautifulSoup(html.text,"html.parser")
     global articles  
  
-    for articlelist in bsObj.findAll("td",{"class":"list_tr"}):  #正则表达式匹配每一篇文章链接  
-        #print(articlelist)  
+    for articlelist in bsObj.findAll("td",{"class":"list_tr"}):  #正则表达式匹配每一篇文章链接   
         if 'href' in articlelist.a.attrs:  
             if articlelist.a.attrs["href"] not in articles:  
                 #遇到了新界面  
-                newArticle=articlelist.a.attrs["href"]  
-                #print(newArticle)  
+                newArticle=articlelist.a.attrs["href"]    
                 articles.add(newArticle)    
   
 #写入文本  
@@ -47,21 +42,6 @@ def data_out(data):
                 out.write('\n')
                 out.write(data)
                 out.close()
-  
-  
-#得到每一篇文章的文字内容  
-def getArticleText(articleUrl):  
-
-    s=Session()
-    html=s.post(articleUrl,headers)
-    html.encoding='utf8'
-    bsObj=BeautifulSoup(html.text,"html.parser")  
-
-    for textlist in bsObj.findAll("meta",{"name":"description"}):
-            data=textlist["content"]
-            #print(data)#要看的话，把sys注释掉，若要存在txt里，则需要sys那两句
-            #data_out(data)
-            
 
 #得到某个主页上所有分页的链接，根据分页链接得到每一篇文章的链接并爬取博客每篇文章的文字
 pages=set()  
@@ -93,3 +73,4 @@ def getPageLinks(tongzhiye):
                      getArticleText(newarticlelist)  
 
 getPageLinks("http://au.njust.edu.cn/2075/list.htm")  
+#参考：https://blog.csdn.net/HW140701/article/details/55210367
