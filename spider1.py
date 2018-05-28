@@ -74,3 +74,37 @@ def getPageLinks(tongzhiye):
 
 getPageLinks("http://au.njust.edu.cn/2075/list.htm")  
 #参考：https://blog.csdn.net/HW140701/article/details/55210367
+
+#若是要存入数据库，可以加几个函数，以下为修改了一些的类
+#可以加上上面的爬虫，然后创建类实例来进行存储，参考：https://blog.csdn.net/a1368783069/article/details/48375695
+     #连接数据库 mysql
+    def connectDB(self):
+        host="……"
+        dbName="……"
+        user="……"
+        password="……"
+        #此处添加charset='utf8'是为了在数据库中显示中文，此编码必须与数据库的编码一致
+        db=MySQLdb.connect(host,user,password,dbName,charset='utf8')
+	return db
+
+     #创建表，SQL语言：表createTableName不存在时就创建
+    def creatTable(self,createTableName):
+        createTableSql="CREATE TABLE IF NOT EXISTS "+ createTableName+"(time VARCHAR(40),title VARCHAR(100),text  VARCHAR(40),clicks VARCHAR(10))" 
+        DB_create=self.connectDB()
+        cursor_create=DB_create.cursor()
+        cursor_create.execute(createTableSql)
+        DB_create.close()
+        print 'creat table '+createTableName+' successfully'      
+        return createTableName 
+
+    #数据插入表中
+    def inserttable(self,insertTable,insertTitle,insertText,insertlink):
+        insertContentSql="INSERT INTO "+insertTable+"(title,text,link)VALUES(%s,%s,%s,%s)"
+        DB_insert=self.connectDB()
+        cursor_insert=DB_insert.cursor()        
+        cursor_insert.execute(insertContentSql,(insertTitle,insertText,insertlink))
+        DB_insert.commit()
+        DB_insert.close()
+        print 'inert contents to  '+insertTable+' successfully'  
+
+
