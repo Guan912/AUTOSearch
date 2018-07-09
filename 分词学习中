@@ -14,9 +14,6 @@ Friso是使用c语言开发的一款高性能中文分词器，使用流行的mm
 我使用的是vs2010, 其他的版本的vs没用过，但是应该差不多啦。
 
 新建工程：
-
-这里为了方便，我是选择从现有的代码中创建项目：文件->新建->从现有的代码中创建项目
-
 (这里注意：请先将friso源码中的tst-开头的c文件去掉，这些都是测试程序，不需要编译到friso.dll文件中去， 
 而且使用的是UTF-8编码, 里面的中文会导致cl编译器的错误)
 
@@ -34,9 +31,9 @@ Friso是使用c语言开发的一款高性能中文分词器，使用流行的mm
 64bit的系统中，#ifdef _WIN32是不会成立的。
 直接将ifdef代码去掉
 【三】 问题
-1、对于第一个问题主要是调用int friso_init_from_ifile( friso_t, friso_config_t, fstring );函数时会用到，
+1、调用int friso_init_from_ifile( friso_t, friso_config_t, fstring );函数时，
 作为fstring类型的参数传入，用于初始化friso_t结构体。在VS开发工程中，可将friso.ini放到工程根目录下，然后直接在程序中以文件名的形式调用即可。
-2、而对于friso.lex_dir配置问题，原先总是发现不对，文档说是绝对路径，放入绝对路径会被截断；而传入相对路径，则又提示打开失败。
+2、而对于friso.lex_dir配置问题。
 因此，在配置friso.lex_dir路径时，只需配置到dict/GBK/这里即可。
 如果dict在工程目录的根目录下，则配置为：friso.lex_dir = dict/GBK/。
 如果用GBK的话，friso.ini中的字符集也要配置成gbk，如：friso.charset = 1（0表示UTF-8）。
