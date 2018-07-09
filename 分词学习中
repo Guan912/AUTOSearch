@@ -4,4 +4,81 @@ Friso是使用c语言开发的一款高性能中文分词器，使用流行的mm
 源码无需修改就能在各种平台下编译使用，加载完20万的词条，内存占用稳定为14.5M。
 开源项目：https://gitee.com/lionsoul/friso
 1、mmseg四种过滤算法，分词准确率达到了98.41%，本算法的原作：http://technology.chtsai.org/mmseg/。
-【待续05/28……】
+……待续05/28……
+
+20180709：
+【二】 WinNT下如何自主编译安装friso：
+
+一、使用VS编译friso得到friso.dll
+
+我使用的是vs2010, 其他的版本的vs没用过，但是应该差不多啦。
+
+新建工程：
+
+这里为了方便，我是选择从现有的代码中创建项目：文件->新建->从现有的代码中创建项目
+
+(这里注意：请先将friso源码中的tst-开头的c文件去掉，这些都是测试程序，不需要编译到friso.dll文件中去， 
+而且使用的是UTF-8编码, 里面的中文会导致cl编译器的错误)
+
+(1). 项目类型选择为visual c++： 
+(2). 选择项目的位置：
+(3). 选择项目类型为："动态链接库(dll)项目"
+(4). 完成 (点击完成即可)
+(5). 编辑项目属性，加上时间优化：
+选择Release | Win32 (64bit系统肯定就不是win32了), 右键选择属性，默认的面板中->全程序优化->使用连接时间代码生成 :
+(6). 编译 生成项目 得到friso.dll
+点击生成Friso.
+(7)如果没有出现错误，你会在项目的Release下得到一个friso.dll和friso.lib文件.
+如果出现了错误：
+请对friso_API.h做如下修改：
+64bit的系统中，#ifdef _WIN32是不会成立的。
+直接将ifdef代码去掉
+【三】 问题
+1、对于第一个问题主要是调用int friso_init_from_ifile( friso_t, friso_config_t, fstring );函数时会用到，
+作为fstring类型的参数传入，用于初始化friso_t结构体。在VS开发工程中，可将friso.ini放到工程根目录下，然后直接在程序中以文件名的形式调用即可。
+2、而对于friso.lex_dir配置问题，原先总是发现不对，文档说是绝对路径，放入绝对路径会被截断；而传入相对路径，则又提示打开失败。
+因此，在配置friso.lex_dir路径时，只需配置到dict/GBK/这里即可。
+如果dict在工程目录的根目录下，则配置为：friso.lex_dir = dict/GBK/。
+如果用GBK的话，friso.ini中的字符集也要配置成gbk，如：friso.charset = 1（0表示UTF-8）。
+3、然后就可以直接调用函数进行中文分词了。
+
+【四】分词接口样板：
+具体请参考源码中的tst-friso.c文件：
+
+friso_t friso;
+friso_config_t config;
+friso_task_t task;
+
+//1.实例化一个friso分词实例。
+friso = friso_new();
+
+//2.创建一个friso分词配置。
+config = friso_new_config();
+
+//3. 依据给定的friso.ini中快捷初始化friso。
+
+if ( friso_init_from_ifile(friso, config, __path__) != 1 ) {
+    printf("fail to initialize friso and config.");
+    goto err;
+}
+
+//4.创建一个分词任务：
+task = friso_new_task();
+
+//3.设置分词任务的分词文本：
+friso_set_text( task, "要被分词的文本");
+
+//4.分词主程序：
+
+while ( ( friso_next( friso, config, task ) ) != NULL ) {
+    //printf("%s[%d,%d]/ ", task->hits->word, task->hits->type, task->hits->offset );
+    printf("%s/ ", task->hits->word );
+}
+
+
+//5.释放相关资源：
+friso_free_task( task );
+
+err:
+    friso_free_config(config);
+    friso_free(friso);
