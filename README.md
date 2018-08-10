@@ -1,6 +1,6 @@
 # AUTOSearch
 *A simple search engine for the contents of the college's notice.*
-## ✏写在前面
+## ✏学习笔记
 > 为了搜一个材料，发现找不到站内搜索😅</br>
 正好看了数学之美，了解了一些爬虫、建索引、结果排序的内容</br>
 学习一波，也方便一下自己</br>
